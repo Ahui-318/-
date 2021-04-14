@@ -1,3 +1,4 @@
+// 搜索结果页
 <template>
   <div class="result-container">
     <div class="title-wrap">
@@ -45,10 +46,10 @@
           </tbody>
         </table>
       </el-tab-pane>
-
+<!-- 歌单 -->
       <el-tab-pane label="歌单" name="lists">
         <div class="items">
-          <div class="item" v-for="(item, index) in playlists" :key="index">
+          <div class="item" v-for="(item, index) in playlists" :key="index" @click="toDetails(item.id)">
             <div class="img-wrap">
               <div class="num-wrap">
                 播放量:
@@ -61,10 +62,10 @@
           </div>
         </div>
       </el-tab-pane>
-
+<!-- mv -->
       <el-tab-pane label="MV" name="mv">
         <div class="items mv">
-          <div class="item" v-for="(item, index) in mvs" :key="index">
+          <div class="item" v-for="(item, index) in mvs" :key="index" @click="toMvDetail(item.id)">
             <div class="img-wrap">
               <img :src="item.cover" alt="" />
               <span class="iconfont icon-play"></span>
@@ -101,6 +102,7 @@
 import { getSearch } from "@/network/search.js";
 // 播放音乐接口
 import { getMusic } from "@/network/newmusic.js";
+import { TimeForm } from "@/utils/TimeForm.js";
 // import { config } from 'vue/types/umd';
 
 export default {
@@ -150,6 +152,16 @@ export default {
     },
   },
   methods: {
+    // 去MV的详情页
+    toMvDetail(id){
+      console.log(id);
+      this.$router.push(`/playMvDetail?q=${id}`)
+    },
+    // 带点击去详情页
+    toDetails(id){
+      console.log(id);
+      this.$router.push(`/playListDetail?q=${id}`)
+    },
     // 点击播放音乐
     playMusic(id) {
       // console.log(id);
@@ -199,26 +211,26 @@ export default {
   created() {
     this._getSearch();
   },
-  filters: {
-    // 时间格式过滤
-    TimeFormat: function (value) {
-      //  this.songs.forEach((item) => {
-      //    let mins = parseInt(item.duration / 1000 /60)
-      //    let sections = parseInt( item.duration / 1000 %60)
-      //    return value = mins+sections
-      //  })
-      let mins = parseInt(value / 1000 / 60);
-      let seconds = parseInt((value / 1000) % 60);
-      seconds = seconds > 10 ? seconds : "0" + seconds;
-      mins = mins > 10 ? mins : "0" + mins;
-      return `${mins}:${seconds}`;
-    },
-    // 播放量过滤
-    playCounts: function (value) {
-      return (value =
-        parseInt(value / 10000) > 0 ? parseInt(value / 10000) + "万" : value);
-    },
-  },
+  // filters: {
+  //   // 时间格式过滤
+  //   TimeFormat: function (value) {
+  //     //  this.songs.forEach((item) => {
+  //     //    let mins = parseInt(item.duration / 1000 /60)
+  //     //    let sections = parseInt( item.duration / 1000 %60)
+  //     //    return value = mins+sections
+  //     //  })
+  //     let mins = parseInt(value / 1000 / 60);
+  //     let seconds = parseInt((value / 1000) % 60);
+  //     seconds = seconds > 10 ? seconds : "0" + seconds;
+  //     mins = mins > 10 ? mins : "0" + mins;
+  //     return `${mins}:${seconds}`;
+  //   },
+  //   // 播放量过滤
+  //   playCounts: function (value) {
+  //     return (value =
+  //       parseInt(value / 10000) > 0 ? parseInt(value / 10000) + "万" : value);
+  //   },
+  // },
 };
 </script>
 

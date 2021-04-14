@@ -36,7 +36,7 @@
           </td>
           <td>{{ item.album.artists[0].name }}</td>
           <td>{{ item.album.name }}</td>
-          <td>{{ item.duration | songTime }}</td>
+          <td>{{ item.duration | TimeFormat }}</td>
         </tr>
       </tbody>
     </table>
@@ -46,7 +46,7 @@
 <script>
 import { getSongs } from "@/network/songs.js";
 import { getMusic } from "@/network/newmusic.js";
-import { throttle } from "@/utils/throttle.js";
+import { TimeForm } from "@/utils/TimeForm.js";
 export default {
   name: "Songs",
   data() {
@@ -78,21 +78,21 @@ export default {
       // console.log(id);
       getMusic(id)
         .then((value) => {
-          console.log(value);
+          // console.log(value);
           this.$parent.musicUrl = value.data.data[0].url;
         })
         .catch((err) => {});
     },
   },
-  filters: {
-    songTime: function (value) {
-      let seconds = parseInt(value / 60000);
-      let mins = parseInt((value / 1000) % 60);
-      seconds = seconds > 10 ? seconds : "0" + seconds;
-      mins = mins > 10 ? mins : mins + "0";
-      return `${seconds}:${mins}`;
-    },
-  },
+  // filters: {
+  //   songTime: function (value) {
+  //     let seconds = parseInt(value / 60000);
+  //     let mins = parseInt((value / 1000) % 60);
+  //     seconds = seconds > 10 ? seconds : "0" + seconds;
+  //     mins = mins > 10 ? mins : mins + "0";
+  //     return `${seconds}:${mins}`;
+  //   },
+  // },
 };
 </script>
 

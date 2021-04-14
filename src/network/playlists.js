@@ -23,3 +23,21 @@ export function getTagLists(options) {
     },
   })
 }
+
+// 获取歌单详情
+export function getPlayDetail(id) {
+  return request({
+    url:'/playlist/detail',
+    params:{
+      id
+    }
+  })
+}
+
+// 获取热门评论
+export function getPlayComment(params) {
+  return request({
+    url:'/comment/playlist',
+    params
+  })
+}

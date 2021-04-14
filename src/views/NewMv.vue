@@ -48,7 +48,7 @@
     <!-- mv容器 -->
     <div class="mvs">
       <div class="items">
-        <div class="item" v-for="(item, index) in mvs" :key="index">
+        <div class="item" v-for="(item, index) in mvs" :key="index" @click="toMvDetail(item.id)">
           <div class="img-wrap">
             <img :src="item.cover" alt="图片" />
             <div class="num-wrap">
@@ -105,6 +105,11 @@ export default {
     };
   },
   methods: {
+    // 去MV的详情页
+    toMvDetail(id){
+      console.log(id);
+      this.$router.push(`/playMvDetail?q=${id}`)
+    },
     // 页码改变事件
     handleCurrentChange(val) {
       // 保存页码

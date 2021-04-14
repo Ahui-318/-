@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { getMusic } from "@/network/newmusic.js";
+// import { getMusic } from "@/network/newmusic.js";
 
 export default {
   name: "DisNew",

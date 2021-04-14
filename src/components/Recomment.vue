@@ -5,10 +5,10 @@
         推荐歌单
       </h3>
       <div class="items" >
-        <div class="item" v-for="(item, index) in recomment" :key="index">
+        <div class="item" v-for="(item, index) in recomment" :key="index" @click="toPlayListDetail(item.id)">
           <div class="img-wrap">
             <div class="desc-wrap">
-              <span class="desc">{{ item.copywriter || '播放量'+item.playCount }}</span>
+              <span class="desc">{{ item.copywriter || item.playCount | playCounts}}</span>
             </div>
             <img :src="item.picUrl || item.coverImgUrl" alt="封面" />
             <span class="iconfont icon-play" ></span>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { TimeForm } from "@/utils/TimeForm.js";
 export default {
   name: "DisRecom",
   props:{
@@ -31,7 +32,16 @@ export default {
     }
   },
   methods: {
-    
+    // 去MV的详情页
+    // toPlayListDetail(id){
+    //   console.log(id);
+    //   this.$router.push(`/playMvDetail?q=${id}`)
+    // },
+    // 带点击去详情页
+    toPlayListDetail(id){
+      console.log(id);
+      this.$router.push(`/playListDetail?q=${id}`)
+    },
   },
 };
 </script>

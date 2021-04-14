@@ -18,6 +18,12 @@ const Songs = () => {
 const Result = () => {
   return import('@/views/Result.vue')
 }
+const ListDetail = () => {
+  return import('@/views/PlayListDetail.vue')
+}
+const MvDetail = () => {
+  return import('@/views/MvDetail.vue')
+}
 
 
 const router = new VueRouter({
@@ -45,6 +51,14 @@ const router = new VueRouter({
     {
       path: '/result',
       component: Result,
+    },
+    {
+      path: '/playListDetail',
+      component: ListDetail,
+    },
+    {
+      path: '/playMvDetail',
+      component: MvDetail,
     },
   ],
   mode: 'history'
